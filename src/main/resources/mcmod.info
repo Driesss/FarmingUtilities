@@ -1,0 +1,22 @@
+[
+{
+  "modid": "FarmingUtilities",
+  "name": "Farming Utilities",
+  "description": "Some cool stuff for advanced farming!",
+  "version": "1.0",
+  "mcversion": "1.7.10",
+  "url": "",
+  "updateUrl": "",
+  "authorList": [
+    "Driesss_s",
+	"Kevin"
+  ],
+  "credits": "Kevin for creating the textures and Driesss_s for doing all the coding",
+  "logoFile": "",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]

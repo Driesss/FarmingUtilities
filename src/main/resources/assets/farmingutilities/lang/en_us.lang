@@ -1,0 +1,12 @@
+# Items
+item.farmingutilities:compostpile.name=Compost
+item.farmingutilities:compostbag.name=Compost Bag
+
+# Blocks
+tile.farmingutilities:compost.name=Compost Block
+tile.farmingutilities:composter.name=Composter
+
+# Itemgroup(creativeTabs)
+itemGroup.FarmingUtilities=Farming Utilities
+
+# Keys
