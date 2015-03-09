@@ -6,6 +6,7 @@ import be.driesstelten.FarmingUtilities.registries.ColorRegistry;
 import be.driesstelten.FarmingUtilities.registries.CompostRegistry;
 import be.driesstelten.FarmingUtilities.utility.Color;
 import be.driesstelten.FarmingUtilities.utility.Compostable;
+import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -20,24 +21,20 @@ import net.minecraft.util.IIcon;
 
 public class TileEntityComposter extends TileEntity implements ISidedInventory {
 	
+	private static final float MIN_RENDER_CAPACITY = 0.1f;
+	private static final float MAX_RENDER_CAPACITY = 0.9f;
+	private static final int MAX_COMPOSTING_TIME = 1000;
+	private static final int UPDATE_INTERVAL = 10;
+	
 	public enum ComposterMode {
 		EMPTY(0, false), 
 		COMPOST(2, false), 
 		DONE(3, true); 
 
-		private ComposterMode(int v, boolean extract) {
-			this.value = v;
-			this.canExtract = extract;
-		}
-		
+		private ComposterMode(int v, boolean extract) { this.value = v; this.canExtract = extract;}
 		public int value;
 		public boolean canExtract;
 	}
-	
-	private static final float MIN_RENDER_CAPACITY = 0.1f;
-	private static final float MAX_RENDER_CAPACITY = 0.9f;
-	private static final int MAX_COMPOSTING_TIME = 1000;
-	private static final int UPDATE_INTERVAL = 10;
 	
 	private float volume;
 	private int timer;
@@ -45,6 +42,8 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 	public Color color;
 	private Color colorBase;
 	public IIcon icon;
+	public Block block;
+	public int blockMeta;
 	
 	private boolean needsUpdate = false;
 	private int updateTimer = 0;
@@ -70,6 +69,7 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 	@Override
 	public void updateEntity() {
 		
+		//Composter state logic
 		if (updateTimer >= UPDATE_INTERVAL)
 		{
 			updateTimer = 0;
@@ -202,7 +202,7 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 	private ItemStack getExtractItem() {
 		//geef compost
 		if (getMode() == ComposterMode.DONE) {
-			return new ItemStack(ModItems.compostpile);
+			return new ItemStack(ModItems.compostpile, 1 ,0);
 		} else {
 			return null;
 		}
@@ -257,6 +257,13 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 		color = new Color(compound.getInteger("color"));
 		colorBase = new Color (compound.getInteger("colorBase"));
 		needsUpdate = true;
+		
+		if (!compound.getString("block").equals("")) {
+			block = (Block)Block.blockRegistry.getObject(compound.getString("block"));
+		} else {
+			block = null;
+		}
+		blockMeta = compound.getInteger("blockMeta");
 	}
 	
 	@Override
@@ -266,8 +273,15 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 		compound.setInteger("mode", getMode().value);
 		compound.setFloat("volume", volume);
 		compound.setInteger("timer", timer);
-		//compound.setInteger("color", color.toInt());
-		//compound.setInteger("colorBase", colorBase.toInt());
+		compound.setInteger("color", color.toInt());
+		compound.setInteger("colorBase", colorBase.toInt());
+		
+		if (block == null) {
+			compound.setString("block", "");
+		} else {
+			compound.setString("block", Block.blockRegistry.getNameForObject(block));
+		}
+		compound.setInteger("blockMeta", blockMeta);
 	}
 	
 	@Override
@@ -284,6 +298,30 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 		
 		NBTTagCompound tag = pkt.func_148857_g();
 		readFromNBT(tag);
+	}
+	
+	public int getNearbyBlocks(Block block, int blockMeta) {
+		int count = 0;
+
+		for (int x = -1; x <= 1; x++) {
+			
+			for (int y = -1; y <= 1; y++) {
+				
+				for (int z = -1; z <= 1; z++) {
+					if(worldObj.getBlock(xCoord + x, yCoord + y, zCoord + z) == block && worldObj.getBlockMetadata(xCoord + x, yCoord + y, zCoord + z) == blockMeta) {
+						
+						count++;
+					}
+				}
+			}
+		}
+
+		return count;
+	}
+	
+	public int getLightLevel() {
+
+		return 0;
 	}
 	
 	@Override
@@ -322,27 +360,29 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
 		//pipe stuffz
-		Item item = stack.getItem();
-		int meta = stack.getItemDamage();
 		
-		if (slot == 0)
-		{
-			if (item == null)
-			{
+		if (stack == null || stack.getItem() == null) {
+			if (slot == 0) {
 				resetComposter();
 			}
-		}
-
-		if (slot == 1)
-		{
-			if (getMode() == ComposterMode.COMPOST || getMode() == ComposterMode.EMPTY)
+		} else {
+			
+			Item item = stack.getItem();
+			int meta = stack.getItemDamage();
+			
+			if (slot == 1)
 			{
-				if(CompostRegistry.containsItem(item, meta))
+				if (getMode() == ComposterMode.COMPOST || getMode() == ComposterMode.EMPTY)
 				{
-					this.addCompostItem(CompostRegistry.getItem(item, meta));
+					if(CompostRegistry.containsItem(item, meta))
+					{
+						this.addCompostItem(CompostRegistry.getItem(item, meta));
+					}
 				}
 			}
 		}
+
+		
 
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
@@ -366,6 +406,7 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
 		return false;
 	}
+	
 	
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack item) {	

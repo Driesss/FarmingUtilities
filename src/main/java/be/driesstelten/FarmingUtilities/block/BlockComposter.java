@@ -77,14 +77,10 @@ public class BlockComposter extends BlockFU implements ITileEntityProvider {
 		
 		TileEntityComposter composter = (TileEntityComposter) world.getTileEntity(x, y, z);
 		
-		LogHelper.info("tileEntity");
-		LogHelper.info("\t" + composter);
-		LogHelper.info("composter mode");
-		LogHelper.info("\t" + composter.getMode());
-		LogHelper.info("comoster can extract");
-		LogHelper.info("\t" + composter.getMode().canExtract);
-		LogHelper.info("equipped item");
-		LogHelper.info("\t" + player.getCurrentEquippedItem());
+		LogHelper.info("tileEntity" + "\t" + composter);
+		LogHelper.info("composter mode" + "\t" + composter.getMode());
+		LogHelper.info("comoster can extract" + "\t" + composter.getMode().canExtract);
+		LogHelper.info("equipped item" + "\t" + player.getCurrentEquippedItem());
 
 		if (composter.getMode().canExtract == true) {
 			
@@ -166,8 +162,13 @@ public class BlockComposter extends BlockFU implements ITileEntityProvider {
 	}
 
 	@Override
-	public int getLightValue() {
+	public int getLightValue(IBlockAccess world, int x, int y, int z) {
 		
+		TileEntityComposter te = (TileEntityComposter) world.getTileEntity(x, y, z);
+		
+		if (te != null) {
+			return te.getLightLevel();
+		}
 		return 0;
 	}
 
