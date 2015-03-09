@@ -26,7 +26,8 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 		DONE(3, true); 
 
 		private ComposterMode(int v, boolean extract) {
-			this.value = v; this.canExtract = extract;
+			this.value = v;
+			this.canExtract = extract;
 		}
 		
 		public int value;
@@ -85,7 +86,7 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 		
 		switch(this.getMode()) {
 		case EMPTY:
-			//be empy
+			//be empty
 			break;
 		case COMPOST:
 			//do compost things

@@ -78,13 +78,13 @@ public class BlockComposter extends BlockFU implements ITileEntityProvider {
 		TileEntityComposter composter = (TileEntityComposter) world.getTileEntity(x, y, z);
 		
 		LogHelper.info("tileEntity");
-		LogHelper.info(composter);
+		LogHelper.info("\t" + composter);
 		LogHelper.info("composter mode");
-		LogHelper.info(composter.getMode());
+		LogHelper.info("\t" + composter.getMode());
 		LogHelper.info("comoster can extract");
-		LogHelper.info(composter.getMode().canExtract);
+		LogHelper.info("\t" + composter.getMode().canExtract);
 		LogHelper.info("equipped item");
-		LogHelper.info(player.getCurrentEquippedItem());
+		LogHelper.info("\t" + player.getCurrentEquippedItem());
 
 		if (composter.getMode().canExtract == true) {
 			
@@ -105,11 +105,9 @@ public class BlockComposter extends BlockFU implements ITileEntityProvider {
 								item = null;
 							}
 						}
+					} else {
+						System.out.println("Item not registered for compost: " + item.getItem() + ":" + item.getItemDamage());	
 					}
-					//						else
-					//						{
-					//							System.out.println("Item not registered for compost: " + item.itemID + ":" + item.getItemDamage());
-					//						}	
 				}
 			}
 		}
