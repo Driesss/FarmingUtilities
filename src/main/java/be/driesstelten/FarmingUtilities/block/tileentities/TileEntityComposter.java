@@ -6,6 +6,7 @@ import be.driesstelten.FarmingUtilities.registries.ColorRegistry;
 import be.driesstelten.FarmingUtilities.registries.CompostRegistry;
 import be.driesstelten.FarmingUtilities.utility.Color;
 import be.driesstelten.FarmingUtilities.utility.Compostable;
+import be.driesstelten.FarmingUtilities.utility.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,11 +40,12 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 	private float volume;
 	private int timer;
 	private ComposterMode mode;
+	public Block block;
+	public int blockMeta;
 	public Color color;
 	private Color colorBase;
 	public IIcon icon;
-	public Block block;
-	public int blockMeta;
+	
 	
 	private boolean needsUpdate = false;
 	private int updateTimer = 0;
@@ -68,6 +70,8 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 	
 	@Override
 	public void updateEntity() {
+		
+		LogHelper.info(this + ":" + timer);
 		
 		//Composter state logic
 		if (updateTimer >= UPDATE_INTERVAL)

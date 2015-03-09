@@ -11,6 +11,9 @@ import be.driesstelten.FarmingUtilities.init.ModBlocks;
 import be.driesstelten.FarmingUtilities.init.ModItems;
 import be.driesstelten.FarmingUtilities.init.Recepies;
 import be.driesstelten.FarmingUtilities.reference.Reference;
+import be.driesstelten.FarmingUtilities.registries.ColorRegistry;
+import be.driesstelten.FarmingUtilities.registries.CompostRegistry;
+import be.driesstelten.FarmingUtilities.utility.Compostable;
 import be.driesstelten.FarmingUtilities.utility.LogHelper;
 import be.driesstelten.FarmingUtilities.proxy.IProxy;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -39,6 +42,7 @@ public class FarmingUtilities {
 		ModItems.init();
 		ModBlocks.init();
 		Recepies.init();
+		
 		LogHelper.info("Pre Initialization Complete!");
 		
 	}
@@ -53,9 +57,9 @@ public class FarmingUtilities {
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		
-		for (String oreName : OreDictionary.getOreNames()) {
-			LogHelper.info(oreName);
-		}
+		//for (String oreName : OreDictionary.getOreNames()) {
+		//	LogHelper.info(oreName);
+		//}
 		
 		LogHelper.info("Post Initialization Complete!");
 		

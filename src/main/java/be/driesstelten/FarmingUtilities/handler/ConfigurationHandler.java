@@ -3,6 +3,8 @@ package be.driesstelten.FarmingUtilities.handler;
 import java.io.File;
 
 import be.driesstelten.FarmingUtilities.reference.Reference;
+import be.driesstelten.FarmingUtilities.registries.ColorRegistry;
+import be.driesstelten.FarmingUtilities.registries.CompostRegistry;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.config.Configuration;
@@ -19,6 +21,9 @@ public class ConfigurationHandler {
 			configuration = new Configuration(configFile);
 			loadConfiguration();
 		}
+		
+		ColorRegistry.load(configuration);
+		CompostRegistry.load(configuration);
 		
 	}
 	

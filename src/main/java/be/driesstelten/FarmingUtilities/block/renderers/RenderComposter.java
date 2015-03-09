@@ -1,6 +1,5 @@
 package be.driesstelten.FarmingUtilities.block.renderers;
 
-import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
 
 import be.driesstelten.FarmingUtilities.block.BlockComposter;
