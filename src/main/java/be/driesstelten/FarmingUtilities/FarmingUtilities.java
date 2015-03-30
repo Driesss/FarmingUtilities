@@ -42,7 +42,6 @@ public class FarmingUtilities {
 		ModItems.init();
 		ModBlocks.init();
 		Recepies.init();
-		
 		LogHelper.info("Pre Initialization Complete!");
 		
 	}
@@ -51,6 +50,8 @@ public class FarmingUtilities {
 	public void init(FMLInitializationEvent event) {
 		
 		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
+		proxy.initializeRenderers();
+		proxy.
 		LogHelper.info("Initialization Complete!");
 	}
 	

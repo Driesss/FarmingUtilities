@@ -11,12 +11,12 @@ import net.minecraft.util.ResourceLocation;
 public class ModelComposter extends ModelBase {
 	
 	private static final ResourceLocation[] textures =  {
-		new ResourceLocation(Reference.MOD_ID, "textures/blocks/ModelComposterOak.png"), 
-		new ResourceLocation(Reference.MOD_ID, "textures/blocks/ModelComposterSpruce.png"), 
-		new ResourceLocation(Reference.MOD_ID, "textures/blocks/ModelComposterBirch.png"),
-		new ResourceLocation(Reference.MOD_ID, "textures/blocks/ModelComposterJungle.png"),
-		new ResourceLocation(Reference.MOD_ID, "textures/blocks/ModelComposterAcacia.png"),
-		new ResourceLocation(Reference.MOD_ID, "textures/blocks/ModelComposterOak.png"),
+		new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/blocks/ModelComposterOak.png"), 
+		new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/blocks/ModelComposterSpruce.png"), 
+		new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/blocks/ModelComposterBirch.png"),
+		new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/blocks/ModelComposterJungle.png"),
+		new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/blocks/ModelComposterAcacia.png"),
+		new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/blocks/ModelComposterOak.png"),
 		};
 	
     public ModelRenderer bottom;

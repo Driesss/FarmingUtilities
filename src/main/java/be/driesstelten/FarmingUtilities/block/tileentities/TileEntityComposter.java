@@ -6,7 +6,6 @@ import be.driesstelten.FarmingUtilities.registries.ColorRegistry;
 import be.driesstelten.FarmingUtilities.registries.CompostRegistry;
 import be.driesstelten.FarmingUtilities.utility.Color;
 import be.driesstelten.FarmingUtilities.utility.Compostable;
-import be.driesstelten.FarmingUtilities.utility.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -71,9 +70,8 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 	@Override
 	public void updateEntity() {
 		
-		LogHelper.info(this + ":" + timer);
 		
-		//Composter state logic
+		//check every 10 ticks if update needed
 		if (updateTimer >= UPDATE_INTERVAL)
 		{
 			updateTimer = 0;
@@ -88,6 +86,7 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 			updateTimer++;
 		}
 		
+		//Composter state logic
 		switch(this.getMode()) {
 		case EMPTY:
 			//be empty
@@ -123,6 +122,8 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 		{
 			setMode(ComposterMode.COMPOST);
 			timer = 0;
+			//update
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
 
 		if (getMode() == ComposterMode.COMPOST && volume < 1.0f)
@@ -232,7 +233,9 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 		color = ColorRegistry.color("white");
 		colorBase = ColorRegistry.color("white");
 		setMode(ComposterMode.EMPTY);
-		needsUpdate = true;
+		//update
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		//needsUpdate = true;
 	}
 	
 	@Override

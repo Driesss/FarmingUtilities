@@ -77,11 +77,14 @@ public class BlockComposter extends BlockFU implements ITileEntityProvider {
 		
 		TileEntityComposter composter = (TileEntityComposter) world.getTileEntity(x, y, z);
 		
-		LogHelper.info("tileEntity" + "\t" + composter);
-		LogHelper.info("composter mode" + "\t" + composter.getMode());
-		LogHelper.info("comoster can extract" + "\t" + composter.getMode().canExtract);
-		LogHelper.info("equipped item" + "\t" + player.getCurrentEquippedItem());
-
+		LogHelper.info("tileEntity\t\t" + composter);
+		LogHelper.info("composter mode\t\t" + composter.getMode());
+		LogHelper.info("comoster can extract\t" + composter.getMode().canExtract);
+		LogHelper.info("equipped item\t\t" + player.getCurrentEquippedItem());
+		LogHelper.info("volume\t\t\t" + composter.getVolume());
+		LogHelper.info("adjustedVolume\t\t" + composter.getAdjustedVolume());
+		LogHelper.info("timer\t\t\t" + composter.getTimer());
+		
 		if (composter.getMode().canExtract == true) {
 			
 			composter.giveAppropriateItem();
@@ -130,7 +133,8 @@ public class BlockComposter extends BlockFU implements ITileEntityProvider {
 	
 	@Override
 	public int getRenderType() {
-		return RenderIds.composter;
+		//return RenderIds.composter;
+		return -1;
 	}
 
 	@Override

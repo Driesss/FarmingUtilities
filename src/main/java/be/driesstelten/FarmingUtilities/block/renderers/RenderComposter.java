@@ -58,15 +58,17 @@ public class RenderComposter extends TileEntitySpecialRenderer {
 			Color color = composter.color;
 			
 			IIcon icon= BlockComposter.iconCompost;
+			boolean transparency = false;
+			
 			if (composter.getMode() == ComposterMode.COMPOST) {
 				icon = BlockComposter.iconCompost;
 			} else if (composter.getMode() == ComposterMode.DONE) {
 				icon = BlockComposter.iconCompost;
 			}
 			
-			boolean transparency = false;
+			transparency = true;
 			internal.render(color, icon, transparency);
-			LogHelper.info("rendering internal");
+			//LogHelper.info("rendering internal");
 			
 			GL11.glPopMatrix();
 		}
