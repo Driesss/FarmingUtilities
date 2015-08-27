@@ -51,7 +51,6 @@ public class FarmingUtilities {
 		
 		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
 		proxy.initializeRenderers();
-		proxy.
 		LogHelper.info("Initialization Complete!");
 	}
 	

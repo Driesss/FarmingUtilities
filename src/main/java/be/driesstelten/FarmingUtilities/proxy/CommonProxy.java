@@ -5,10 +5,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public abstract class CommonProxy implements IProxy{
 	
-	public void registerTileEntities() {
-
-		GameRegistry.registerTileEntity(TileEntityComposter.class, TileEntityComposter.);
-		
-	}
+	
 
 }

@@ -234,8 +234,8 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 		colorBase = ColorRegistry.color("white");
 		setMode(ComposterMode.EMPTY);
 		//update
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		//needsUpdate = true;
+		//worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		needsUpdate = true;
 	}
 	
 	@Override
@@ -388,8 +388,6 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 				}
 			}
 		}
-
-		
 
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
