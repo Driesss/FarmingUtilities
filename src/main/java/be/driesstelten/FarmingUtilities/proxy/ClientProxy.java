@@ -9,7 +9,6 @@ import be.driesstelten.FarmingUtilities.block.renderers.RenderComposter;
 import be.driesstelten.FarmingUtilities.block.renderers.blockItems.ItemRenderComposter;
 import be.driesstelten.FarmingUtilities.block.tileentities.TileEntityComposter;
 import be.driesstelten.FarmingUtilities.init.ModBlocks;
-import be.driesstelten.FarmingUtilities.utility.LogHelper;
 import cpw.mods.fml.client.registry.ClientRegistry;
 
 public class ClientProxy extends CommonProxy {

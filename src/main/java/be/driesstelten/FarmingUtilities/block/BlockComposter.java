@@ -78,22 +78,22 @@ public class BlockComposter extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		if (player == null) {
-			LogHelper.info("player == null");
+			//LogHelper.info("player == null");
 			return false;
 		}
 		
-		LogHelper.info("player");
-		LogHelper.info(player);
+		//LogHelper.info("player");
+		//LogHelper.info(player);
 		
 		TileEntityComposter composter = (TileEntityComposter) world.getTileEntity(x, y, z);
 		
-		LogHelper.info("tileEntity\t\t" + composter);
-		LogHelper.info("composter mode\t\t" + composter.getMode());
-		LogHelper.info("comoster can extract\t" + composter.getMode().canExtract);
-		LogHelper.info("equipped item\t\t" + player.getCurrentEquippedItem());
-		LogHelper.info("volume\t\t\t" + composter.getVolume());
-		LogHelper.info("adjustedVolume\t\t" + composter.getAdjustedVolume());
-		LogHelper.info("timer\t\t\t" + composter.getTimer());
+		//LogHelper.info("tileEntity\t\t" + composter);
+		//LogHelper.info("composter mode\t\t" + composter.getMode());
+		//LogHelper.info("comoster can extract\t" + composter.getMode().canExtract);
+		//LogHelper.info("equipped item\t\t" + player.getCurrentEquippedItem());
+		//LogHelper.info("volume\t\t\t" + composter.getVolume());
+		//LogHelper.info("adjustedVolume\t\t" + composter.getAdjustedVolume());
+		//LogHelper.info("timer\t\t\t" + composter.getTimer());
 		
 		if (composter.getMode().canExtract == true) {
 			
@@ -138,7 +138,7 @@ public class BlockComposter extends BlockContainer {
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
 		blockIcon = Blocks.planks.getIcon(0, 0);
-		LogHelper.info("!!!!!!!!!!!!!!" + ModData.TEXTURE_LOCATION + ":IconComposterCompost");
+		//LogHelper.info("!!!!!!!!!!!!!!" + ModData.TEXTURE_LOCATION + ":IconComposterCompost");
 		iconCompost = register.registerIcon(ModData.TEXTURE_LOCATION + ":IconComposterCompost");
 	}
 	

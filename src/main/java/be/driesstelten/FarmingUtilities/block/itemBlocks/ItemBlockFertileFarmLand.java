@@ -4,9 +4,9 @@ import be.driesstelten.FarmingUtilities.data.ModData;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 
-public class ItemBlockCompost extends ItemBlock {
+public class ItemBlockFertileFarmLand extends ItemBlock {
 	
-	public ItemBlockCompost(Block block) {
+	public ItemBlockFertileFarmLand(Block block) {
 		super(block);
 		setHasSubtypes(false);
 	}

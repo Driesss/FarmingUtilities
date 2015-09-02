@@ -16,5 +16,7 @@ public class BlockData {
 	//Compost Block
 	public static final String COMPOST_KEY = "compost";
 	public static final String COMPOST_UNLOCALIZED_NAME = "compost";
+	public static final String FERTILEFARMLAND_KEY = "fertilefarmland";
+	public static final String FERTILEFARMLAND_ULOCALIZED_NAME = "fertilefarmland";
 
 }

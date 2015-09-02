@@ -31,7 +31,7 @@ public class BlockFU extends Block {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
 		
-		LogHelper.info("!!!!!!!!!!!!!!" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1) + "!!!!!!!!!!!!!!!!");
+		//LogHelper.info("!!!!!!!!!!!!!!" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1) + "!!!!!!!!!!!!!!!!");
 		blockIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
 		
 	}

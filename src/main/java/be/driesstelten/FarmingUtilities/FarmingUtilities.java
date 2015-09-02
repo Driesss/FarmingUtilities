@@ -1,6 +1,9 @@
 package be.driesstelten.FarmingUtilities;
 
 import net.minecraftforge.common.MinecraftForge;
+
+import com.typesafe.config.ConfigOrigin;
+
 import be.driesstelten.FarmingUtilities.client.handler.KeyInputEventHandler;
 import be.driesstelten.FarmingUtilities.data.ModData;
 import be.driesstelten.FarmingUtilities.handler.ConfigurationHandler;
