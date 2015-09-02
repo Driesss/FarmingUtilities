@@ -4,7 +4,13 @@ item.farmingutilities:compostbag.name=Compost Bag
 
 # Blocks
 tile.farmingutilities:compost.name=Compost Block
-tile.farmingutilities:composter.name=Composter
+tile.farmingutilities:composter.oak.name=Oak Composter
+tile.farmingutilities:composter.birch.name=Birch Composter
+tile.farmingutilities:composter.spruce.name=Spruce Composter
+tile.farmingutilities:composter.jungle.name=Jungle Composter
+tile.farmingutilities:composter.acacia.name=Acacia Composter
+tile.farmingutilities:composter.dark_oak.name=Dark Oak Composter
+
 
 # Itemgroup(creativeTabs)
 itemGroup.FarmingUtilities=Farming Utilities

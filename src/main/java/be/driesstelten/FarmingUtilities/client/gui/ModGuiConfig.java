@@ -1,17 +1,15 @@
 package be.driesstelten.FarmingUtilities.client.gui;
 
-import java.util.List;
-
 import be.driesstelten.FarmingUtilities.handler.ConfigurationHandler;
 import be.driesstelten.FarmingUtilities.reference.Reference;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.client.config.GuiConfig;
-import cpw.mods.fml.client.config.IConfigElement;
 
 public class ModGuiConfig extends GuiConfig {
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ModGuiConfig(GuiScreen guiScreen) {
 		
 		super(guiScreen,

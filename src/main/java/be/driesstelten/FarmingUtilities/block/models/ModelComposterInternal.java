@@ -38,8 +38,7 @@ public class ModelComposterInternal extends ModelBase {
 		tessellator.addVertexWithUV(x, y, z + length, maxU, minV);
 		tessellator.draw();
 		
-		if (blend == true)
-		{
+		if (blend == true) {
 			GL11.glEnable(GL11.GL_LIGHTING);
 			GL11.glDisable(GL11.GL_BLEND);
 		}

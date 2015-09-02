@@ -7,10 +7,7 @@ import be.driesstelten.FarmingUtilities.block.models.ModelComposter;
 import be.driesstelten.FarmingUtilities.block.models.ModelComposterInternal;
 import be.driesstelten.FarmingUtilities.block.tileentities.TileEntityComposter;
 import be.driesstelten.FarmingUtilities.block.tileentities.TileEntityComposter.ComposterMode;
-import be.driesstelten.FarmingUtilities.init.ModBlocks;
-import be.driesstelten.FarmingUtilities.registries.ColorRegistry;
 import be.driesstelten.FarmingUtilities.utility.Color;
-import be.driesstelten.FarmingUtilities.utility.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -54,10 +51,11 @@ public class RenderComposter extends TileEntitySpecialRenderer {
 			GL11.glPushMatrix();
 			GL11.glTranslatef((float)x + 0.5F,(float)y + composter.getAdjustedVolume(),(float)z + 0.5F);
 			GL11.glScalef(0.8f, 1.0f, 0.8f);
-
-			Color color = composter.color;
+			
+			bindInternalTexture();
 			
 			IIcon icon= BlockComposter.iconCompost;
+			Color color = composter.color;
 			boolean transparency = false;
 			
 			if (composter.getMode() == ComposterMode.COMPOST) {
@@ -66,7 +64,6 @@ public class RenderComposter extends TileEntitySpecialRenderer {
 				icon = BlockComposter.iconCompost;
 			}
 			
-			transparency = true;
 			internal.render(color, icon, transparency);
 			//LogHelper.info("rendering internal");
 			
@@ -76,10 +73,15 @@ public class RenderComposter extends TileEntitySpecialRenderer {
 	}
 	
 	public void bindComposterTexture(Block block, int meta) {
-		if (meta >= 0)
-		{
+		if (meta >= 0) {
 			bindTexture(composter.getComposterTexture(block, meta));
 		}
+	}
+	
+	public void bindInternalTexture()
+	{
+		ResourceLocation fluidTexture = TextureMap.locationBlocksTexture;
+		bindTexture(fluidTexture);
 	}
 
 }

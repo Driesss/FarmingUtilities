@@ -1,6 +1,5 @@
 package be.driesstelten.FarmingUtilities.block.tileentities;
 
-import be.driesstelten.FarmingUtilities.init.ModBlocks;
 import be.driesstelten.FarmingUtilities.init.ModItems;
 import be.driesstelten.FarmingUtilities.registries.ColorRegistry;
 import be.driesstelten.FarmingUtilities.registries.CompostRegistry;
@@ -28,8 +27,8 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 	
 	public enum ComposterMode {
 		EMPTY(0, false), 
-		COMPOST(2, false), 
-		DONE(3, true); 
+		COMPOST(1, false), 
+		DONE(2, true); 
 
 		private ComposterMode(int v, boolean extract) { this.value = v; this.canExtract = extract;}
 		public int value;
@@ -72,17 +71,13 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 		
 		
 		//check every 10 ticks if update needed
-		if (updateTimer >= UPDATE_INTERVAL)
-		{
+		if (updateTimer >= UPDATE_INTERVAL) {
 			updateTimer = 0;
-			if (needsUpdate)
-			{
+			if (needsUpdate) {
 				needsUpdate = false;
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
-		}
-		else
-		{
+		} else {
 			updateTimer++;
 		}
 		
@@ -93,8 +88,7 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 			break;
 		case COMPOST:
 			//do compost things
-			if (volume >= 1.0F)
-			{
+			if (volume >= 1.0F) {
 				timer++;
 
 				//Change color
@@ -102,8 +96,7 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 				color = Color.average(colorBase, colorDirt, (float)timer / (float)MAX_COMPOSTING_TIME);
 
 				//Are we done yet?
-				if(timer >= TileEntityComposter.MAX_COMPOSTING_TIME)
-				{
+				if(timer >= TileEntityComposter.MAX_COMPOSTING_TIME) {
 					setMode(ComposterMode.DONE);
 					timer = 0;
 					color = ColorRegistry.color("white");
@@ -118,20 +111,15 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 	}
 	
 	public boolean addCompostItem(Compostable item) {
-		if (getMode() == ComposterMode.EMPTY)
-		{
+		if (getMode() == ComposterMode.EMPTY) {
 			setMode(ComposterMode.COMPOST);
 			timer = 0;
-			//update
-			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
 
-		if (getMode() == ComposterMode.COMPOST && volume < 1.0f)
-		{
+		if (getMode() == ComposterMode.COMPOST && volume < 1.0f) {
 			volume += item.value;
 
-			if (volume > 1.0f)
-			{
+			if (volume > 1.0f) {
 				volume = 1.0f;
 			}
 
@@ -147,8 +135,7 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 			color = new Color(r,g,b,a);
 
 			//Set the starting color that will be used in the cooking process.
-			if (volume == 1.0f)
-			{
+			if (volume == 1.0f) {
 				colorBase = color;
 			}
 
@@ -163,11 +150,9 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 	}
 	
 	public boolean isFull() {
-		if (volume >= 1.0f)
-		{
+		if (volume >= 1.0f) {
 			return true;
-		}else
-		{
+		} else {
 			return false;
 		}
 	}
@@ -338,8 +323,7 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		if (slot == 0)
-		{
+		if (slot == 0) {
 			return getExtractItem();
 		}
 
@@ -348,8 +332,7 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 	
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) {
-		if (slot == 0)
-		{
+		if (slot == 0) {
 			ItemStack item = getExtractItem();
 
 			resetComposter();
@@ -377,12 +360,9 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 			Item item = stack.getItem();
 			int meta = stack.getItemDamage();
 			
-			if (slot == 1)
-			{
-				if (getMode() == ComposterMode.COMPOST || getMode() == ComposterMode.EMPTY)
-				{
-					if(CompostRegistry.containsItem(item, meta))
-					{
+			if (slot == 1) {
+				if (getMode() == ComposterMode.COMPOST || getMode() == ComposterMode.EMPTY) {
+					if(CompostRegistry.containsItem(item, meta)) {
 						this.addCompostItem(CompostRegistry.getItem(item, meta));
 					}
 				}
@@ -412,11 +392,16 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 		return false;
 	}
 	
+	@Override
+	public void openInventory() {}
+
+	@Override
+	public void closeInventory() {}
+	
 	
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack item) {	
-		if (slot == 1)
-		{
+		if (slot == 1) {
 			return isItemValid(item);
 		}
 
@@ -425,11 +410,9 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side) {
-		if (side == 0)
-		{
+		if (side == 0) {
 			return new int[]{0};
-		}else if (side == 1)
-		{
+		} else if (side == 1) {
 			return new int[]{1};
 		}
 
@@ -438,8 +421,7 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 	
 	@Override
 	public boolean canInsertItem(int slot, ItemStack item, int side) {
-		if (side == 1 && slot == 1)
-		{
+		if (side == 1 && slot == 1) {
 			return isItemValid(item);
 		}
 
@@ -448,10 +430,8 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 
 	@Override
 	public boolean canExtractItem(int slot, ItemStack item, int side) {
-		if (side == 0 && slot == 0)
-		{
-			if (getMode().canExtract == true)
-			{
+		if (side == 0 && slot == 0) {
+			if (getMode().canExtract == true) {
 				return true;
 			}
 		}
@@ -459,8 +439,7 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 		return false;
 	}
 	
-	public boolean isItemValid(ItemStack stack)
-	{
+	public boolean isItemValid(ItemStack stack) {
 		///XXX isItemValid
 		Item item = stack.getItem();
 		int meta = stack.getItemDamage();
@@ -473,18 +452,6 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory {
 		}
 
 		return false;
-	}
-
-	@Override
-	public void openInventory() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void closeInventory() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

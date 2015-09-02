@@ -1,12 +1,12 @@
 package be.driesstelten.FarmingUtilities.block;
 
 import be.driesstelten.FarmingUtilities.reference.Reference;
+import be.driesstelten.FarmingUtilities.utility.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.ItemStack;
 
 public class BlockFU extends Block {
 	
@@ -17,7 +17,7 @@ public class BlockFU extends Block {
 	
 	public BlockFU() {
 	
-		this(Material.rock);
+		this(Material.ground);
 	}
 	
 	@Override
@@ -31,6 +31,7 @@ public class BlockFU extends Block {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
 		
+		LogHelper.info("!!!!!!!!!!!!!!" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1) + "!!!!!!!!!!!!!!!!");
 		blockIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
 		
 	}

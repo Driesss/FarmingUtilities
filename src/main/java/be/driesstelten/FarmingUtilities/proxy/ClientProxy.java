@@ -9,6 +9,7 @@ import be.driesstelten.FarmingUtilities.block.renderers.RenderComposter;
 import be.driesstelten.FarmingUtilities.block.renderers.blockItems.ItemRenderComposter;
 import be.driesstelten.FarmingUtilities.block.tileentities.TileEntityComposter;
 import be.driesstelten.FarmingUtilities.init.ModBlocks;
+import be.driesstelten.FarmingUtilities.utility.LogHelper;
 import cpw.mods.fml.client.registry.ClientRegistry;
 
 public class ClientProxy extends CommonProxy {
@@ -18,7 +19,10 @@ public class ClientProxy extends CommonProxy {
 		
 		ModelComposter composter = new ModelComposter();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityComposter.class, new RenderComposter(composter));
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.composter) , new ItemRenderComposter(composter));
+		//LogHelper.info("****** Shoud register itemrenderer now");
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.composter), new ItemRenderComposter(composter));
+		//LogHelper.info("****** Shoud be done registring");
+		
 	}
 
 	@Override

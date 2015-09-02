@@ -1,7 +1,6 @@
 package be.driesstelten.FarmingUtilities.block.models;
 
-import be.driesstelten.FarmingUtilities.init.ModBlocks;
-import be.driesstelten.FarmingUtilities.reference.Reference;
+import be.driesstelten.FarmingUtilities.data.ModData;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -11,12 +10,12 @@ import net.minecraft.util.ResourceLocation;
 public class ModelComposter extends ModelBase {
 	
 	private static final ResourceLocation[] textures =  {
-		new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/blocks/ModelComposterOak.png"), 
-		new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/blocks/ModelComposterSpruce.png"), 
-		new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/blocks/ModelComposterBirch.png"),
-		new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/blocks/ModelComposterJungle.png"),
-		new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/blocks/ModelComposterAcacia.png"),
-		new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/blocks/ModelComposterOak.png"),
+		new ResourceLocation(ModData.TEXTURE_LOCATION, "textures/blocks/ModelComposterOak.png"), 
+		new ResourceLocation(ModData.TEXTURE_LOCATION, "textures/blocks/ModelComposterSpruce.png"), 
+		new ResourceLocation(ModData.TEXTURE_LOCATION, "textures/blocks/ModelComposterBirch.png"),
+		new ResourceLocation(ModData.TEXTURE_LOCATION, "textures/blocks/ModelComposterJungle.png"),
+		new ResourceLocation(ModData.TEXTURE_LOCATION, "textures/blocks/ModelComposterAcacia.png"),
+		new ResourceLocation(ModData.TEXTURE_LOCATION, "textures/blocks/ModelComposterDarkOak.png"),
 		};
 	
     public ModelRenderer bottom;

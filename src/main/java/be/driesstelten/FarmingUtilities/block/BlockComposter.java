@@ -1,19 +1,19 @@
 package be.driesstelten.FarmingUtilities.block;
 
-import org.apache.logging.log4j.Level;
+import java.util.List;
 
 import be.driesstelten.FarmingUtilities.block.tileentities.TileEntityComposter;
 import be.driesstelten.FarmingUtilities.block.tileentities.TileEntityComposter.ComposterMode;
 import be.driesstelten.FarmingUtilities.creativeTab.CreativeTabFU;
+import be.driesstelten.FarmingUtilities.data.BlockData;
+import be.driesstelten.FarmingUtilities.data.ModData;
 import be.driesstelten.FarmingUtilities.reference.Reference;
-import be.driesstelten.FarmingUtilities.reference.RenderIds;
 import be.driesstelten.FarmingUtilities.registries.CompostRegistry;
 import be.driesstelten.FarmingUtilities.utility.LogHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -26,7 +26,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockComposter extends BlockFU implements ITileEntityProvider {
+public class BlockComposter extends BlockContainer {
 	
 	@SideOnly(Side.CLIENT)
 	public static IIcon iconCompost;
@@ -36,13 +36,27 @@ public class BlockComposter extends BlockFU implements ITileEntityProvider {
 		setCreativeTab(CreativeTabFU.FU_TAB);
 		setHardness(2.0f);
 		setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 1.0F, 0.9F);
-		this.setBlockName("composter");
+		this.setBlockName(Reference.MOD_ID + "." + BlockData.COMPOSTER_KEY);
 		GameRegistry.registerTileEntity(TileEntityComposter.class, this.getUnlocalizedName());
 		
 	}
 	
 	public BlockComposter(Material material) {
 		super(material);
+	}
+	
+	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	@SideOnly(Side.CLIENT)
+	public void getSubBlocks(Item item, CreativeTabs tabs,List subItems) {
+		for (int i = 0; i < 6; i++) {
+			subItems.add(new ItemStack(item, 1, i));
+		}
+	}
+	
+	@Override
+	public int damageDropped (int metadata) {
+		return metadata;
 	}
 
 	@Override
@@ -52,11 +66,7 @@ public class BlockComposter extends BlockFU implements ITileEntityProvider {
 	}
 	
 	@Override
-	public int damageDropped (int metadata) {
-		return metadata;
-	}
-	
-	@Override
+	@SuppressWarnings("unused")
 	public void onBlockAdded(World world, int x, int y, int z) {
 		
 		super.onBlockAdded(world, x, y, z);
@@ -128,7 +138,8 @@ public class BlockComposter extends BlockFU implements ITileEntityProvider {
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
 		blockIcon = Blocks.planks.getIcon(0, 0);
-		iconCompost = register.registerIcon(Reference.MOD_ID + ":" + "IconBarrelCompost");
+		LogHelper.info("!!!!!!!!!!!!!!" + ModData.TEXTURE_LOCATION + ":IconComposterCompost");
+		iconCompost = register.registerIcon(ModData.TEXTURE_LOCATION + ":IconComposterCompost");
 	}
 	
 	@Override
@@ -152,6 +163,7 @@ public class BlockComposter extends BlockFU implements ITileEntityProvider {
 		return true;
 	}
 	
+	@SuppressWarnings("unused")
 	private ItemStack getContainer(ItemStack item) {
 		if (item.stackSize == 1) {
 			if (item.getItem().hasContainerItem(item))  {

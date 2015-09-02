@@ -1,29 +1,27 @@
 package be.driesstelten.FarmingUtilities.block.itemBlocks;
 
-import be.driesstelten.FarmingUtilities.data.BlockData;
 import be.driesstelten.FarmingUtilities.data.ModData;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 
-public class ItemBlockComposter extends ItemBlock {
+public class ItemBlockCompost extends ItemBlock {
 	
-	public ItemBlockComposter(Block block) {
+	public ItemBlockCompost(Block block) {
 		super(block);
-		setHasSubtypes(true);
+		setHasSubtypes(false);
 	}
 	
 	@Override
-	public String getUnlocalizedName(ItemStack itemstack) {
+	public String getUnlocalizedName() {
 		
-		return String.format("tile.%s%s", ModData.ID + ":", BlockData.COMPOSTER_UNLOCALIZED_NAMES[itemstack.getItemDamage()]);
+		return String.format("tile.%s%s", ModData.ID + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
 		
 	}
 	
 	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
 		
 		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
-	}	
+	}
 	
 	@Override
 	public int getMetadata(int meta)
