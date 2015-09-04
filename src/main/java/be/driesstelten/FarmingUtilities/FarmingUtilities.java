@@ -39,8 +39,8 @@ public class FarmingUtilities {
 		
 		PacketHandler.init();
 		
-		ModItems.init();
 		ModBlocks.init();
+		ModItems.init();
 		Recepies.init();
 		
 		proxy.registerKeyBindings();

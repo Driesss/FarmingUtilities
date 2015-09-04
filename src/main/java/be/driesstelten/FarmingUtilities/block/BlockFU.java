@@ -1,7 +1,6 @@
 package be.driesstelten.FarmingUtilities.block;
 
 import be.driesstelten.FarmingUtilities.reference.Reference;
-import be.driesstelten.FarmingUtilities.utility.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;

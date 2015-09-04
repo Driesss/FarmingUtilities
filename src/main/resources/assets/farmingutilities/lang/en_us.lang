@@ -1,6 +1,8 @@
 # Items
 item.farmingutilities:compostpile.name=Compost
 item.farmingutilities:compostbag.name=Compost Bag
+item.farmingutilities:woodbucket.name=Wooden Bucket
+item.farmingutilities.waterwoodbucket.name=Wooden Water Bucket
 
 # Blocks
 tile.farmingutilities:fertilefarmland.name=Fertile FarmLand
